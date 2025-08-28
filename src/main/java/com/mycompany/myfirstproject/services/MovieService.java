@@ -2,6 +2,7 @@ package com.mycompany.myfirstproject.services;
 
 import com.mycompany.myfirstproject.entity.Movie;
 import com.mycompany.myfirstproject.repository.MovieRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,10 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class MovieService {
 
-    @Autowired
-    private MovieRepository movieRepo;
+    private final MovieRepository movieRepo;
 
     public List<Movie> getMyMovies(){
 
