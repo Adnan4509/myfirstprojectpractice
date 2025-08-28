@@ -50,5 +50,13 @@ public class MovieController{
         return ResponseEntity.ok(movie);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteSpecificMovie(@PathVariable long id){
+
+        System.out.println("trying to delete movie");
+        movieService.deleteFromId(id);
+
+        System.out.println("movie deleted successfully");
+    }
 }
 

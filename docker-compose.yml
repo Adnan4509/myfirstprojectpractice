@@ -1,27 +1,27 @@
 services:
   db:
     image: postgres:17
-    container_name: postgres17
+    container_name: postgres17practice
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: moviespracdb
     ports:
-      - "5432:5432"
+      - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
 
   pgadmin:
     image: dpage/pgadmin4:latest
-    container_name: pgadmin4
+    container_name: pgadmin4practice
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: adnan@postgres.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "8081:80"
+      - "8082:80"
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     depends_on:
