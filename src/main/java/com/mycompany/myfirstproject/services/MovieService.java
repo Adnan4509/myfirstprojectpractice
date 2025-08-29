@@ -35,11 +35,13 @@ public class MovieService {
 
     }
 
-    public Movie createMovie(MovieReponseDto movieObj){
+    public MovieReponseDto createMovie(MovieReponseDto movieObj){
         Movie newMovie = PostMapper.DtoTo(movieObj);
-       return  movieRepo.save(newMovie);
 
-//         return null;
+       Movie savedMovie = movieRepo.save(newMovie);
+       MovieReponseDto returnMovie = MovieMapper.toDTO(savedMovie);
+
+         return returnMovie;
 
     }
 

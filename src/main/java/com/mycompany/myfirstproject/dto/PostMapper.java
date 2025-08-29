@@ -7,6 +7,7 @@ public class PostMapper {
         Movie movie = new Movie();
         movie.setId(postDto.getId());
         movie.setTitle(postDto.getName());
+        movie.setRating(postDto.getStars());
         movie.setDescription(postDto.getInformation());
 
         return movie;

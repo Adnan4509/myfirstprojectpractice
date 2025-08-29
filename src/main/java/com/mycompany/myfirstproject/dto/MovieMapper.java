@@ -8,7 +8,7 @@ public class MovieMapper {
         dto.setId(movie.getId());
         dto.setName(movie.getTitle());
         dto.setStars(movie.getRating());
-
+        dto.setInformation(movie.getDescription());
         return dto;
     }
 

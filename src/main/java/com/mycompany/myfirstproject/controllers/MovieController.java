@@ -1,5 +1,6 @@
 package com.mycompany.myfirstproject.controllers;
 
+import com.mycompany.myfirstproject.dto.MovieMapper;
 import com.mycompany.myfirstproject.dto.MovieReponseDto;
 import com.mycompany.myfirstproject.entity.Movie;
 import com.mycompany.myfirstproject.services.MovieService;
@@ -45,11 +46,11 @@ public class MovieController{
 
 
     @PostMapping
-    public ResponseEntity<Movie> createNewMovie(@RequestBody MovieReponseDto body){
+    public ResponseEntity<MovieReponseDto> createNewMovie(@RequestBody MovieReponseDto body){
         //some processing
-        Movie movie = movieService.createMovie(body);
+        MovieReponseDto savedMovie = movieService.createMovie(body);
 
-        return ResponseEntity.ok(movie);
+        return ResponseEntity.ok(savedMovie);
     }
 
     @DeleteMapping("/{id}")
