@@ -1,5 +1,6 @@
 package com.mycompany.myfirstproject.controllers;
 
+import com.mycompany.myfirstproject.dto.MovieReponseDto;
 import com.mycompany.myfirstproject.entity.Movie;
 import com.mycompany.myfirstproject.services.MovieService;
 import lombok.RequiredArgsConstructor;
@@ -33,9 +34,9 @@ public class MovieController{
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getSpecificMovie1(@PathVariable Long id){
+    public ResponseEntity<MovieReponseDto> getSpecificMovie1(@PathVariable Long id){
 
-        Movie retrivedMovie = movieService.getMovieFromId(id);
+        MovieReponseDto retrivedMovie = movieService.getMovieFromId(id);
 
         return ResponseEntity.ok(retrivedMovie);
     }
@@ -44,9 +45,10 @@ public class MovieController{
 
 
     @PostMapping
-    public ResponseEntity<Movie> createNewMovie(@RequestBody Movie body){
+    public ResponseEntity<Movie> createNewMovie(@RequestBody MovieReponseDto body){
         //some processing
         Movie movie = movieService.createMovie(body);
+
         return ResponseEntity.ok(movie);
     }
 
