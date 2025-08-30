@@ -15,4 +15,9 @@ public class SongService {
     public List<Song> getAllSongs(){
         return songRepo.findAll();
     }
+
+    public Song createSong(Song songObj) {
+
+        return songRepo.save(songObj);
+    }
 }
