@@ -1,17 +1,14 @@
 package com.mycompany.myfirstproject.controllers;
 
-import com.mycompany.myfirstproject.dto.MovieMapper;
-import com.mycompany.myfirstproject.dto.MovieReponseDto;
+import com.mycompany.myfirstproject.dto.MovieRequestDto;
+import com.mycompany.myfirstproject.dto.MovieResponseDto;
 import com.mycompany.myfirstproject.entity.Movie;
 import com.mycompany.myfirstproject.services.MovieService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 //localhost:8080           /api/movies
@@ -35,9 +32,9 @@ public class MovieController{
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieReponseDto> getSpecificMovie1(@PathVariable Long id){
+    public ResponseEntity<MovieResponseDto> getSpecificMovie1(@PathVariable Long id){
 
-        MovieReponseDto retrivedMovie = movieService.getMovieFromId(id);
+        MovieResponseDto retrivedMovie = movieService.getMovieFromId(id);
 
         return ResponseEntity.ok(retrivedMovie);
     }
@@ -46,9 +43,9 @@ public class MovieController{
 
 
     @PostMapping
-    public ResponseEntity<MovieReponseDto> createNewMovie(@RequestBody MovieReponseDto body){
+    public ResponseEntity<MovieResponseDto> createNewMovie(@RequestBody MovieRequestDto body){
         //some processing
-        MovieReponseDto savedMovie = movieService.createMovie(body);
+        MovieResponseDto savedMovie = movieService.createMovie(body);
 
         return ResponseEntity.ok(savedMovie);
     }
