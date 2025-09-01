@@ -8,6 +8,7 @@ import com.mycompany.myfirstproject.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,12 +17,15 @@ public class MovieService {
 
     private final MovieRepository movieRepo;
 
-    public List<Movie> getMyMovies(){
-//
-       return movieRepo.findAll();
-//        List<Movie> movie = movieRepo.findAll();
-//        List<MovieReponseDto>  dtoList = MovieMapper.toDTO(movie);
-//        return null;
+    public List<MovieResponseDto> getMyMovies(){
+
+        List<Movie> movie = movieRepo.findAll();
+        List<MovieResponseDto> allMovies = new ArrayList<>();
+        for(Movie mov: movie){
+            MovieResponseDto responseDto = MovieMapper.toResponseDTO(mov);
+            allMovies.add(responseDto);
+        }
+        return allMovies;
 
     }
 
