@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,11 +21,8 @@ public class MovieService {
     public List<MovieResponseDto> getMyMovies(){
 
         List<Movie> movie = movieRepo.findAll();
-        List<MovieResponseDto> allMovies = new ArrayList<>();
-        for(Movie mov: movie){
-            MovieResponseDto responseDto = MovieMapper.toResponseDTO(mov);
-            allMovies.add(responseDto);
-        }
+        List<MovieResponseDto> allMovies = movie.stream().map(MovieMapper::toResponseDTO).collect(Collectors.toList());
+
         return allMovies;
 
     }
