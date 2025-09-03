@@ -5,3 +5,4 @@ public record MovieRequestDto(
         String description
 ) {
 }
+

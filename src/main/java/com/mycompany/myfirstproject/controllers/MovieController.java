@@ -2,6 +2,7 @@ package com.mycompany.myfirstproject.controllers;
 
 import com.mycompany.myfirstproject.dto.MovieRequestDto;
 import com.mycompany.myfirstproject.dto.MovieResponseDto;
+import com.mycompany.myfirstproject.dto.MovieUpdateDto;
 import com.mycompany.myfirstproject.entity.Movie;
 import com.mycompany.myfirstproject.services.MovieService;
 import lombok.RequiredArgsConstructor;
@@ -57,6 +58,11 @@ public class MovieController{
         movieService.deleteFromId(id);
 
         System.out.println("movie deleted successfully");
+    }
+
+    @PatchMapping("/{id}")
+    public MovieResponseDto changeMovie(@PathVariable long id, @RequestBody MovieUpdateDto body){
+       return movieService.changeInfo(id, body);
     }
 }
 
