@@ -63,4 +63,13 @@ public class MovieService {
 
         return MovieMapper.toResponseDTO(changedMovie);
     }
+
+    public MovieResponseDto createMovieById(long id, MovieRequestDto body) {
+        Movie movie = movieRepo.findById(id).orElseThrow();
+        Movie newMovie= MovieMapper.toEntity(body);
+        newMovie.setId(movie.getId());
+        Movie createNewMovie = movieRepo.save(newMovie);
+        return MovieMapper.toResponseDTO(createNewMovie);
+
+    }
 }

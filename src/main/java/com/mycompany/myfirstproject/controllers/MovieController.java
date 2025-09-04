@@ -64,5 +64,10 @@ public class MovieController{
     public MovieResponseDto changeMovie(@PathVariable long id, @RequestBody MovieUpdateDto body){
        return movieService.changeInfo(id, body);
     }
+
+    @PutMapping("/{id}")
+    public MovieResponseDto putNewMovie(@PathVariable long id, @RequestBody MovieRequestDto body){
+        return movieService.createMovieById(id,body);
+    }
 }
 
