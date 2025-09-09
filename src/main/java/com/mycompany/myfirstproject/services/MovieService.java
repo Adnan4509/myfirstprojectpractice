@@ -7,12 +7,14 @@ import com.mycompany.myfirstproject.dto.MovieUpdateDto;
 import com.mycompany.myfirstproject.entity.Movie;
 import com.mycompany.myfirstproject.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -20,13 +22,20 @@ public class MovieService {
 
     private final MovieRepository movieRepo;
 
-    public List<MovieResponseDto> getMyMovies(){
+//    public List<MovieResponseDto> getMyMovies(){
+//
+//        List<Movie> movie = movieRepo.findAll();
+//        List<MovieResponseDto> allMovies = movie.stream().map(MovieMapper::toResponseDTO).collect(Collectors.toList());
+//
+//        return allMovies;
+//
+//    }
 
-        List<Movie> movie = movieRepo.findAll();
-        List<MovieResponseDto> allMovies = movie.stream().map(MovieMapper::toResponseDTO).collect(Collectors.toList());
-
-        return allMovies;
-
+    public Page<MovieResponseDto> getMyMovies(int pageSize, int pageNumber){
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Movie> moviesPage = movieRepo.findAll(pageable);
+        Page<MovieResponseDto>  moviesDto = moviesPage.map(MovieMapper::toResponseDTO);
+        return moviesDto;
     }
 
    public MovieResponseDto getMovieFromId(Long id){

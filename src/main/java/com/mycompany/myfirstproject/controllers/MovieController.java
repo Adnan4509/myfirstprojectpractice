@@ -6,6 +6,7 @@ import com.mycompany.myfirstproject.dto.MovieUpdateDto;
 import com.mycompany.myfirstproject.entity.Movie;
 import com.mycompany.myfirstproject.services.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +22,18 @@ public class MovieController{
     private final MovieService movieService;
 
 
+//    @GetMapping
+//    public ResponseEntity<List<MovieResponseDto>> getAllMovies(){
+//        List<MovieResponseDto> movies =  movieService.getMyMovies();
+//        return ResponseEntity.ok(movies);
+//    }
+
     @GetMapping
-    public ResponseEntity<List<MovieResponseDto>> getAllMovies(){
-        List<MovieResponseDto> movies =  movieService.getMyMovies();
-        return ResponseEntity.ok(movies);
+    public Page<MovieResponseDto> getAllMovies(@RequestParam(defaultValue = "10") int pageSize,
+                                                      @RequestParam(defaultValue = "0") int pageNumber){
+
+        return movieService.getMyMovies(pageSize, pageNumber);
     }
-
-
 
 
 
