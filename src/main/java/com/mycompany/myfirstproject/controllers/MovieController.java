@@ -30,9 +30,10 @@ public class MovieController{
 
     @GetMapping
     public Page<MovieResponseDto> getAllMovies(@RequestParam(defaultValue = "10") int pageSize,
-                                                      @RequestParam(defaultValue = "0") int pageNumber){
+                                               @RequestParam(defaultValue = "0") int pageNumber,
+                                               @RequestParam(defaultValue = "0") long rating){
 
-        return movieService.getMyMovies(pageSize, pageNumber);
+        return movieService.getMyMovies(pageNumber, pageSize, rating);
     }
 
 

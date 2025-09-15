@@ -31,9 +31,15 @@ public class MovieService {
 //
 //    }
 
-    public Page<MovieResponseDto> getMyMovies(int pageSize, int pageNumber){
+    public Page<MovieResponseDto> getMyMovies(int pageNumber, int pageSize, long rating){
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        Page<Movie> moviesPage = movieRepo.findAll(pageable);
+        Page<Movie> moviesPage;
+        if(rating != 0){
+            moviesPage = movieRepo.findByRatingGreaterThan(rating, pageable);
+        }else{
+            moviesPage = movieRepo.findAll(pageable);
+        }
+
         Page<MovieResponseDto>  moviesDto = moviesPage.map(MovieMapper::toResponseDTO);
         return moviesDto;
     }
