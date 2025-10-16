@@ -5,6 +5,7 @@ import com.mycompany.myfirstproject.dto.MovieResponseDto;
 import com.mycompany.myfirstproject.dto.MovieUpdateDto;
 import com.mycompany.myfirstproject.entity.Movie;
 import com.mycompany.myfirstproject.services.MovieService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -51,9 +52,9 @@ public class MovieController{
 
 
     @PostMapping
-    public ResponseEntity<MovieResponseDto> createNewMovie(@RequestBody MovieRequestDto body){
+    public ResponseEntity<String> createNewMovie(@RequestBody @Valid MovieRequestDto body){
         //some processing
-        MovieResponseDto savedMovie = movieService.createMovie(body);
+        var savedMovie = movieService.createMovie(body);
 
         return ResponseEntity.ok(savedMovie);
     }

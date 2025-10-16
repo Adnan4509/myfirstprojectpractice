@@ -5,6 +5,7 @@ import com.mycompany.myfirstproject.dto.MovieRequestDto;
 import com.mycompany.myfirstproject.dto.MovieResponseDto;
 import com.mycompany.myfirstproject.dto.MovieUpdateDto;
 import com.mycompany.myfirstproject.entity.Movie;
+import com.mycompany.myfirstproject.kafka.NotificationProducer;
 import com.mycompany.myfirstproject.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,7 @@ import java.util.stream.Stream;
 public class MovieService {
 
     private final MovieRepository movieRepo;
+    private final NotificationProducer notificationProducer;
 
 //    public List<MovieResponseDto> getMyMovies(){
 //
@@ -50,11 +52,12 @@ public class MovieService {
 
     }
 
-    public MovieResponseDto createMovie(MovieRequestDto movieObj){
-        Movie newMovie = MovieMapper.toEntity(movieObj);
-        movieRepo.save(newMovie);
-        return MovieMapper.toResponseDTO(newMovie);
+    public String createMovie(MovieRequestDto movieObj){
 
+        notificationProducer.sendMovie(movieObj);
+
+
+        return "Saving movie through kafka";
     }
 
     public void deleteFromId(Long id){
